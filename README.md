@@ -4,14 +4,12 @@ A simple REST API service that provides health check functionality for DevOps mo
 
 ## Overview
 
-This Health API Service is built using Python and FastAPI, providing a robust foundation for monitoring application health and system status. The service implements RESTful endpoints that return comprehensive health information including system metrics and application status.
+This Health API Service is built using Python and FastAPI, providing a lightweight foundation for monitoring application health. The service implements a simple health check endpoint that returns the current status of the application.
 
 ## Features
 
-- **Health Check Endpoint**: Comprehensive health status with system information
-- **Simple Health Check**: Minimal health status for basic monitoring
+- **Health Check Endpoint**: Simple health status with timestamp
 - **Error Handling**: Robust error handling with appropriate HTTP status codes
-- **System Information**: Detailed system metrics including CPU, memory, and disk usage
 - **API Documentation**: Auto-generated OpenAPI/Swagger documentation
 - **Unit Tests**: Comprehensive test suite with 95%+ coverage
 - **Logging**: Structured logging for monitoring and debugging
@@ -31,26 +29,7 @@ Returns basic API information and available endpoints.
 ```
 
 ### GET /health
-Returns comprehensive health status with system information.
-
-**Response:**
-```json
-{
-  "status": "Healthy",
-  "timestamp": "2025-01-13T10:30:45Z",
-  "system_info": {
-    "python_version": "3.11.0",
-    "platform": "macOS-13.0-arm64-arm-64bit",
-    "cpu_count": 8,
-    "memory_total": 17179869184,
-    "memory_available": 8589934592,
-    "disk_usage": 45.2
-  }
-}
-```
-
-### GET /health/simple
-Returns minimal health status for basic monitoring.
+Returns simple health status with timestamp.
 
 **Response:**
 ```json
@@ -111,7 +90,7 @@ pytest
 
 ### Run Tests with Coverage
 ```bash
-pytest --cov=main test_main.py
+pytest --cov=main
 ```
 
 ### Run Tests with Verbose Output
@@ -131,7 +110,7 @@ The API includes comprehensive documentation that is automatically generated usi
 ```
 devops_course/
 ├── main.py              # Main application file
-├── test_main.py         # Unit tests
+├── test_simple.py      # Simple test script
 ├── requirements.txt     # Python dependencies
 ├── README.md           # This file
 ├── .gitignore          # Git ignore rules
@@ -166,7 +145,6 @@ The application uses structured logging with the following levels:
 - **FastAPI**: Modern, fast web framework for building APIs
 - **Uvicorn**: ASGI server for running FastAPI applications
 - **Pytest**: Testing framework
-- **Psutil**: System and process utilities
 - **HTTPX**: HTTP client for testing
 
 ## Development
@@ -185,10 +163,10 @@ The application uses structured logging with the following levels:
 
 ## Monitoring and Health Checks
 
-The health endpoints are designed for integration with monitoring systems:
+The health endpoint is designed for integration with monitoring systems:
 
-- **Load Balancers**: Use `/health/simple` for basic health checks
-- **Monitoring Systems**: Use `/health` for detailed system metrics
+- **Load Balancers**: Use `/health` for basic health checks
+- **Monitoring Systems**: Use `/health` for application status
 - **Alerting**: Monitor response times and error rates
 
 ## Security Considerations
@@ -201,8 +179,8 @@ The health endpoints are designed for integration with monitoring systems:
 ## Performance
 
 - FastAPI provides high performance with async support
-- Minimal response times (< 100ms for health checks)
-- Efficient system information gathering
+- Minimal response times (< 50ms for health checks)
+- Lightweight and efficient
 - Optimized for concurrent requests
 
 ## Troubleshooting

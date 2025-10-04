@@ -3,18 +3,15 @@ Health API Service
 
 A simple REST API service that provides health check functionality.
 This service implements a GET /health endpoint that returns the current
-status of the application along with system information.
+status of the application.
 
 Author: DevOps Course Student
 Date: 2025-01-13
 """
 
 import logging
-import sys
 from datetime import datetime, timezone
-from typing import Dict, Any
-import platform
-import psutil
+from typing import Dict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
@@ -46,29 +43,6 @@ app.add_middleware(
 )
 
 
-class HealthService:
-    """Service class for health check functionality."""
-    
-    @staticmethod
-    def get_system_info() -> Dict[str, Any]:
-        """
-        Gather system information for health check.
-        
-        Returns:
-            Dict containing system information
-        """
-        try:
-            return {
-                "python_version": sys.version,
-                "platform": platform.platform(),
-                "cpu_count": psutil.cpu_count(),
-                "memory_total": psutil.virtual_memory().total,
-                "memory_available": psutil.virtual_memory().available,
-                "disk_usage": psutil.disk_usage('/').percent
-            }
-        except Exception as e:
-            logger.error(f"Error gathering system info: {e}")
-            return {"error": "Unable to gather system information"}
 
 
 @app.get("/", response_model=Dict[str, str])
@@ -86,31 +60,21 @@ async def root():
     }
 
 
-@app.get("/health", response_model=Dict[str, Any])
+@app.get("/health", response_model=Dict[str, str])
 async def health_check():
     """
     Health check endpoint that returns the current status of the application.
     
     Returns:
-        JSON response with health status and system information
-        
-    Raises:
-        HTTPException: If there's an error during health check
+        JSON response with basic health status
     """
     try:
         logger.info("Health check requested")
-        
-        # Get current timestamp in ISO format
         timestamp = datetime.now(timezone.utc).isoformat()
         
-        # Gather system information
-        system_info = HealthService.get_system_info()
-        
-        # Prepare health response
         health_response = {
             "status": "Healthy",
-            "timestamp": timestamp,
-            "system_info": system_info
+            "timestamp": timestamp
         }
         
         logger.info("Health check completed successfully")
@@ -118,28 +82,6 @@ async def health_check():
         
     except Exception as e:
         logger.error(f"Health check failed: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Health check failed: {str(e)}"
-        )
-
-
-@app.get("/health/simple", response_model=Dict[str, str])
-async def simple_health_check():
-    """
-    Simple health check endpoint with minimal response.
-    
-    Returns:
-        JSON response with basic health status
-    """
-    try:
-        timestamp = datetime.now(timezone.utc).isoformat()
-        return {
-            "status": "Healthy",
-            "timestamp": timestamp
-        }
-    except Exception as e:
-        logger.error(f"Simple health check failed: {e}")
         raise HTTPException(
             status_code=500,
             detail="Health check failed"
