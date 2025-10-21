@@ -41,12 +41,12 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         load: true
-        tags: test_${{ steps.docker_meta_step.outputs.tags }}
+        tags: ${{ steps.docker_meta_step.outputs.tags }}
         labels: ${{ steps.docker_meta_step.outputs.labels }}
       
     - name: Run test on test image
       run: |
-        docker run --rm test_${{ steps.docker_meta_step.outputs.tags }} pytest test_simple.py
+        docker run --rm ${{ steps.docker_meta_step.outputs.tags }} pytest test_simple.py
 
     - name: Push image to registry
       uses: docker/build-push-action@v6
