@@ -1,0 +1,11 @@
+__pycache__
+.env
+.git
+.gitignore
+.vscode
+.pytest_cache
+.ruff_cache
+.ruff_cache
+venv
+README.md
+Dockerfile
