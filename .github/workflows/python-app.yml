@@ -40,18 +40,19 @@ jobs:
     - name: Create docker image for testing
       uses: docker/build-push-action@v6
       with:
+        context: .
         load: true
-        tags: ${{ steps.docker_meta_step.outputs.tags }}
-        labels: ${{ steps.docker_meta_step.outputs.labels }}
+        tags: ${{ steps.docker-meta-step.outputs.tags }}
+        labels: ${{ steps.docker-meta-step.outputs.labels }}
       
     - name: Run test on test image
       run: |
-        docker run --rm ${{ steps.docker_meta_step.outputs.tags }} pytest test_simple.py
+        docker run --rm ${{ steps.docker-meta-step.outputs.tags }} pytest test_simple.py
 
     - name: Push image to registry
       uses: docker/build-push-action@v6
       with:
         context: .
         push: true
-        tags: ${{ steps.docker_meta_step.outputs.tags }}
-        labels: ${{ steps.docker_meta_step.outputs.labels }}
+        tags: ${{ steps.docker-meta-step.outputs.tags }}
+        labels: ${{ steps.docker-meta-step.outputs.labels }}
