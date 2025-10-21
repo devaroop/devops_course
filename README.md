@@ -241,3 +241,6 @@ For questions or issues, please contact the course instructor or create an issue
 - Production env
 - shell form vs exec form - (ctrl-c sigint)
 - cmd vs entrypoint: whats the main usecase? when use both? sh -c vs direct vs array?
+- shell injection possible in sh -c vs array?
+- buildx, moby buildkit?
+- why use venv inside the container?
