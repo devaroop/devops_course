@@ -231,3 +231,13 @@ For questions or issues, please contact the course instructor or create an issue
 **Last Updated**: January 13, 2025  
 **Version**: 1.0.0  
 **Author**: DevOps Course Student
+
+
+### Doubts for 3rd week
+
+- Run tests within or against the container?
+- Uses of non root user?
+- Running via main.py vs CMD in dockerfile 
+- Production env
+- shell form vs exec form - (ctrl-c sigint)
+- cmd vs entrypoint: whats the main usecase? when use both? sh -c vs direct vs array?
