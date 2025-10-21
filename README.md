@@ -244,3 +244,4 @@ For questions or issues, please contact the course instructor or create an issue
 - shell injection possible in sh -c vs array?
 - buildx, moby buildkit?
 - why use venv inside the container?
+- building image twice workaround?
