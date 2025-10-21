@@ -1,11 +1,11 @@
-from python:3.10.19-alpine3.22
+FROM python:3.10.19-alpine3.22
 
-workdir /app
+WORKDIR /app
 
-copy requirements.txt .
+COPY requirements.txt .
 
-run pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-copy . .
+COPY . .
 
-cmd ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
