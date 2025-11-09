@@ -5,7 +5,7 @@ metadata:
   labels:
     app: python-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: python-app
@@ -20,6 +20,14 @@ spec:
         ports:
         - containerPort: 8000
         imagePullPolicy: Never
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
 
 ---
 apiVersion: v1
