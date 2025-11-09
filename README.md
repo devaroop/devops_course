@@ -245,3 +245,4 @@ For questions or issues, please contact the course instructor or create an issue
 - buildx, moby buildkit?
 - why use venv inside the container?
 - building image twice workaround?
+- docker build tag management?
