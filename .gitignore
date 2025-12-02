@@ -146,3 +146,6 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+
+.terraform/
+.terraform.lock.hcl
