@@ -35,3 +35,13 @@ module "security_group" {
   
   depends_on = [module.vpc]
 }
+
+module "ec2" {
+  source = "./modules/ec2"
+  
+  subnet_id          = module.vpc.public_subnet_id
+  security_group_ids = [module.security_group.security_group_id]
+  instance_type      = "t3.micro"
+  
+  depends_on = [module.vpc, module.security_group]
+}
