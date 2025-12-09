@@ -246,3 +246,5 @@ For questions or issues, please contact the course instructor or create an issue
 - why use venv inside the container?
 - building image twice workaround?
 - docker build tag management?
+
+TF_LOG=debug arch -arm64 terraform init
